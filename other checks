@@ -1,0 +1,21 @@
+
+
+#!/bin/bash
+ 
+EMAIL=<EMAIL ADDRESS Which you want to be notified>
+HOSTNAM=`hostname`
+QSIZE="200"
+ 
+MQ=`find /var/spool/exim/input -name '*-H' | wc -l 1| sed -e "s/ //g"`
+ 
+if [ "$MQ" -gt "$QSIZE" ]
+then
+echo “There are $MQ messages in Mail Queue!” | /opt/sendEmail/sendEmail.pl -f <FROM EMAIL ADDRESS>;; -t $EMAIL -u "MAIL QUEUE ALERT: Mail queue for $HOSTNAM" -s <SMTP SERVER:PORT>; -xu <SERVER USERNAME> -xp <PASSWORD> -o tls=no
+fi
+
+
+
+echo "Choose according to the need"
+PS3='Choice? '
+
+options=(")
