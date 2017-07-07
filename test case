@@ -1,0 +1,20 @@
+#!/bin/env bash
+
+echo "Coohe depending on need:
+
+PS3='Your Choice? '
+
+options= ("01" "02" "03")
+
+
+select op in "${options[@]}"
+do
+  case $op in 
+      "01") clear; echo "Basic troubleshooting and details"
+      count=$(exim -bpc) 
+      echo "queue count is $count"
+      eximqsumm
+      
+      
+      
+      
