@@ -9,11 +9,31 @@ options= ("01" "02" "03")
 
 select op in "${options[@]}"
 do
+sep="===============================";
   case $op in 
       "01") clear; echo "Basic troubleshooting and details"
       count=$(exim -bpc) 
       echo "queue count is $count"
-      eximqsumm
+      #eximqsumm
+      #Need to check what is the best course of action for acqiring details
+      #about the volumes with the username
+      ;;
+      "02") clear; echo"Indentfy malicious activity"
+      #Check for crons
+      exim -bp | awk '/(*)/ {print $5}' | cut -d '(' -f2 | cut -d ')' -f1 | sort | uniq c |awk '$1 > 50' | sort -nk1 > /admin/$username/exim.text
+      #crons
+      for i in $(cat /admin/$username/exim.text | awk '{print $2}'); do echo $sep; grep $i -R /varlog/cron/;done
+      #logs
+      cd /var/log/; for i in $(ls exim.*| grep -v gz); do cat  $i | grep -oP "(?>=cwd= \/home\d).*(?=args)"
+      #needs to check the output for the above command. ^^^
+      ;;
+      "03") clear; echo "Full exim report at /admin/$username/exm_report"
+      echo "count is $count"
+      exim -bp | awk '{print $4}' | cut -d '(' -f2 | cut -d ')' -f1 | sort | uniq -c | sort -nk1 | awk '{print $2}' |
+      
+      
+      
+      
       
       
       
