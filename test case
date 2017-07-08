@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-echo "Coohe depending on need:
+echo "Choose depending on need:
 
 PS3='Your Choice? '
 
