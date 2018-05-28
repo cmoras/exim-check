@@ -19,3 +19,4 @@ echo "Choose according to the need"
 PS3='Choice? '
 
 options=(")
+git/raidstat$ a=$(cat studen | awk 'END{print NR}');  cat studen | while read -r line;do while [ $a -gt 0 ]; do awk '{print "="; }'; break; done; a=$(( 1 + 2 )); done
